@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  nginx:
+    build: ./docker/nginx
+    depends_on:
+      - php
+    links:
+      - php
+    ports:
+      - "80:80"
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - wpsite
+
+  php:
+    build: ./docker/php
+    ports:
+      - "9000:9000"
+    volumes:
+      - wordpress:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - db
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: secret
+      WORDPRESS_DB_USER: user
+    networks:
+      - wpsite
+
+  db:
+    # image: mariadb
+    build: ./docker/mariadb
+    ports:
+        - '3306:3306'
+    volumes:
+        - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    restart: always
+    networks:
+      - wpsite
+
+networks:
+  wpsite:
+
+
+volumes:
+  db-data:
+  wordpress:
