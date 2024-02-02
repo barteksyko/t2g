@@ -1,0 +1,1 @@
+ZADANIE: Utwórz docker-compose z działającym Wordpressem. Spraw, aby strona była dostępna po HTTPS podczas stawiania Dockera na localhost. Oprzyj kontenery Dockera o własne obrazy wywiedzione z Ubuntu (FROM ubuntu) 
