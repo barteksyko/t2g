@@ -16,8 +16,10 @@ COPY self-signed.conf /etc/nginx/snippets/self-signed.conf
 COPY ssl-params.conf /etc/nginx/snippets/ssl-params.conf
 COPY default /etc/nginx/sites-available/default
 
-RUN apt install certbot python3-certbot-nginx -y
-RUN certbot certonly --webroot -w /var/www/html --staging --register-unsafely-without-email --rsa-key-size 2048 --agree-tos --force-renewal -d localhost
+# Let's Encrypt will not issue a certificate for the "localhost" domain because this is an address that is not publicly available on the Internet
+
+# RUN apt install certbot python3-certbot-nginx -y
+# RUN certbot certonly --webroot -w /var/www/html --staging --register-unsafely-without-email --rsa-key-size 2048 --agree-tos --force-renewal -d localhost
 
 EXPOSE 80/tcp
 EXPOSE 443/tcp
