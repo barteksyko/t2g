@@ -1,40 +1,7 @@
-# FROM php:8.2-fpm
-
-# FROM ubuntu:latest
-
-# ENV DEBIAN_FRONTEND=noninteractive
-# # WORKDIR /var/www/html
-# # Aktualizacja pakietów i instalacja narzędzi
-# RUN apt update && \
-#     apt-get upgrade -y; \
-#     apt-get install -y curl wget tar unzip && \
-#     apt-get install -y php8.1 \
-#     php8.1-fpm \
-#     php8.1-mysql \
-#     php8.1-cli \
-#     php-json \
-#     php8.1-opcache \
-#     php8.1-mbstring \
-#     php8.1-xml \
-#     php8.1-gd \
-#     php8.1-curl
-# # RUN mkdir -p /var/www/html
-
-
-# # RUN wget https://wordpress.org/latest.tar.gz && \
-# #     tar -xzvf latest.tar.gz -C /var/www/html --strip-components=1
-
-# # RUN chown -R www-data:www-data /var/www/html
-
-# # RUN chmod -R 755 /var/www/html/
-
-# # wget https://wordpress.org/latest.tar.gz
-# # tar zxvf latest.tar.gz --strip-components=1 -C /var/www/html
-# CMD ["/usr/sbin/php-fpm8.1", "-F"]
-
-
 FROM ubuntu
+
 WORKDIR /var/www/html
+
 RUN apt-get update && \
     apt-get install -y -q software-properties-common
 RUN add-apt-repository ppa:ondrej/php
